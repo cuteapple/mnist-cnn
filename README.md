@@ -10,7 +10,7 @@ just some sample code
  - keras (assume tensorflow backend)
  - h5py
  - numpy
- - opencv-python
+ - opencv-python (demo.py only)
  
 ## contact
  - t105598018+wirl@ntut.org.tw
