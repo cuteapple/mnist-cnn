@@ -32,7 +32,7 @@ layers = [Conv2D(32,kernel_size=3,activation='relu',input_shape=(28,28,1)),
 	Dropout(0.25),
 
 	Flatten(),
-	Dense(256),
+	Dense(256,activation='relu'),
 	Dropout(0.5),
 
 	Dense(10, activation='softmax')]
