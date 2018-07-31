@@ -46,6 +46,7 @@ g = ImageDataGenerator(width_shift_range=5,height_shift_range=5)
 #
 # train (1 epoch reach 0.98 test accuracy) 
 #
+
 #model.fit(x,y,batch_size=32,epochs=100,validation_data=(tx,ty))
 model.fit_generator(g.flow(x,y,batch_size=32),steps_per_epoch=len(x) // 32,epochs=100,validation_data=(tx,ty))
 model.save('model.h5')
