@@ -2,13 +2,15 @@
 # python 3.6
 
 # === dependency ===
-# h5py
 # keras
+# h5py
+# numpy
 # ==================
 # assume tensorflow backend (data)
 
 # === contact ===
 # t105598018+wirl@ntut.org.tw
+
 import keras
 
 #
@@ -55,7 +57,7 @@ ty = keras.utils.to_categorical(ty,10)
 g = ImageDataGenerator(width_shift_range=5,height_shift_range=5)
 
 #
-# train
+# train (1 epoch reach 0.98 test accuracy) 
 #
 #model.fit(x,y,batch_size=32,epochs=100,validation_data=(tx,ty))
 model.fit_generator(g.flow(x,y,batch_size=32),steps_per_epoch=len(x) // 32,epochs=100,validation_data=(tx,ty))
