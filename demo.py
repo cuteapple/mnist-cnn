@@ -29,8 +29,9 @@ def onmouse(event,x,y,flags,param):
 		return
 
 	#print(y,x)
-	change = change or canvas[y,x] != 1
-	canvas[y,x] = 1
+	if 0 < y < 27 and 0 < x < 27:
+		change = change or canvas[y,x] != 1
+		canvas[y,x] = 1
 
 cv2.setMouseCallback(window,onmouse)
 
