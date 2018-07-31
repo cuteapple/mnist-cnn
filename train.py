@@ -1,16 +1,3 @@
-# === dev env ===
-# python 3.6
-
-# === dependency ===
-# keras
-# h5py
-# numpy
-# ==================
-# assume tensorflow backend (data)
-
-# === contact ===
-# t105598018+wirl@ntut.org.tw
-
 import keras
 
 #

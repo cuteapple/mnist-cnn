@@ -1,18 +1,6 @@
-# === dev env ===
-# python 3.6
-
-# === dependency ===
-# keras
-# h5py
-# numpy
-
-# === contact ===
-# t105598018+wirl@ntut.org.tw
-
-#
-# load
-#
 import keras
+
+# load
 model = keras.models.load_model('model.h5')
 
 
