@@ -7,10 +7,10 @@ just some sample code
  - python 3.6
 
 ## dependency
- - keras (assume tensorflow backend)
- - h5py
- - numpy
- - opencv-python (demo.py only)
+ - keras 2.2.0 (assume tensorflow backend)
+ - h5py 2.7.1
+ - numpy 1.14.3
+ - opencv-python 3.4.1.15 (demo.py only)
  
 ## contact
  - t105598018+wirl@ntut.org.tw
