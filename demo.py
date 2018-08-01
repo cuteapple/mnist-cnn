@@ -40,9 +40,9 @@ cv2.namedWindow('predict')
 predict = np.zeros(10)
 colors = np.random.rand(10)*0.8+0.2
 def drawpredict():
-	output = np.zeros((10,100))
+	output = np.zeros((100,10))
 	for i in range(10):
-		output[i,0:int(predict[i]*100)] = colors[i]
+		output[100-int(predict[i]*100):,i] = colors[i]
 	cv2.imshow('predict',cv2.resize(output,(256,256),interpolation=cv2.INTER_NEAREST))
 	n = np.argmax(predict)
 	print(n)
