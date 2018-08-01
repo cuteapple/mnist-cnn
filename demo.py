@@ -35,6 +35,21 @@ def onmouse(event,x,y,flags,param):
 
 cv2.setMouseCallback(window,onmouse)
 
+# output window
+cv2.namedWindow('predict')
+predict = np.zeros(10)
+colors = np.random.rand(10)*0.8+0.2
+def drawpredict():
+	output = np.zeros((10,100))
+	for i in range(10):
+		output[i,0:int(predict[i]*100)] = colors[i]
+	cv2.imshow('predict',cv2.resize(output,(256,256),interpolation=cv2.INTER_NEAREST))
+	n = np.argmax(predict)
+	print(n)
+	print(predict)
+	cv2.setWindowTitle('predict', str(n))
+
+
 while True:
 	k = cv2.waitKey(33) & 0xFF
 	if k == 27:
@@ -44,5 +59,6 @@ while True:
 	
 	cv2.imshow(window,cv2.resize(canvas,(28 * sx,28 * sy),interpolation=cv2.INTER_NEAREST))
 	if change:
-		print(model.predict(canvas.reshape(1,28,28,1))[0])
+		predict = model.predict(canvas.reshape(1,28,28,1))[0]
+		drawpredict()
 		change = False
