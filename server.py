@@ -12,6 +12,6 @@ def index():
 @app.route('/predict',methods=['POST'])
 def predict():
 	json = request.get_json(force=True)
-	return jsonify(res = [float(x) for x in np.random.rand(10)])
+	return jsonify(pred = [float(x) for x in np.random.rand(10)])
 
 app.run()

@@ -4,7 +4,9 @@
     <title>mnist-cnn</title>
     <script>
         let data = Array(28 * 28).fill(0)
-
+        /** result bars
+         * @type{HTMLDivElement[]}*/
+        let bars = []
         let hold = false
         document.addEventListener("mousedown", () => { hold = true })
         document.addEventListener("mouseup", () => { hold = false })
@@ -22,6 +24,13 @@
                 pixel.onmousemove = () => draw(pixel, x, y)
                 canvas.appendChild(pixel)
             }
+
+            let results = document.querySelector('#results')
+            for (let x = 0; x < 10; ++x) {
+                let bar = document.createElement('div')
+                bars[x] = bar
+                results.appendChild(bar)
+            }
         }
 
         async function predict() {
@@ -32,7 +41,12 @@
             })
 
             let pred = await res.json()
+            pred = pred.pred
             console.log(pred)
+
+            for (let i = 0; i < 10; ++i) {
+                bars[i].style.marginTop = Math.floor(pred[i] * 100) + '%';
+            }
         }
 
     </script>
@@ -53,7 +67,7 @@
             grid-template-rows: repeat(28,1fr)
         }
 
-            .mnist-grid > * {
+            .mnist-grid > div {
                 width: 100%;
                 height: 100%;
             }
@@ -61,11 +75,26 @@
         [data-on] {
             background-color: black;
         }
+
+        #results {
+            display: grid;
+            height: 50px;
+            width: 280px;
+            grid-template-columns: repeat(10,1fr);
+            grid-column-gap: 1px;
+            border: 1px solid black;
+        }
+
+            #results > div {
+                background-color: black;
+                vertical-align: bottom;
+            }
     </style>
 </head>
 <body onload="init()">
     <div class="mnist-grid" id="main-canvas"></div>
-    <button onclick="predict()">predict</button>
+    <button onclick="predict()" style="margin:10px 0">predict</button>
+    <div id="results"></div>
     <footer>
         <hr>
         contact: 105598018+wirl@ntut.org.tw
