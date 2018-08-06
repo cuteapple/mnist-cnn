@@ -1,9 +1,12 @@
-from flask import Flask, jsonify, request, send_file
-import numpy as np
-#import keras
+import keras
+model = keras.models.load_model('model.h5')
+model._make_predict_function()
 
+from flask import Flask, jsonify, request, send_file
 app = Flask(__name__)
-#model = keras.models.load_model('model.h5')
+
+import numpy as np
+import cv2
 
 @app.route('/')
 def index():
@@ -12,6 +15,9 @@ def index():
 @app.route('/predict',methods=['POST'])
 def predict():
 	json = request.get_json(force=True)
-	return jsonify(pred = [float(x) for x in np.random.rand(10)])
+	data = np.array(json,dtype=float).reshape(1,28,28,1)
+
+	cv2.imwrite('last-predict.png',data[0] * 255)
+	return jsonify(pred = [float(x) for x in model.predict(data)[0]])
 
 app.run()
