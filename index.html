@@ -24,6 +24,17 @@
             }
         }
 
+        async function predict() {
+            let res = await fetch('./predict', {
+                body: JSON.stringify(data),
+                headers: { 'content-type': 'application/json' },
+                method: 'POST'
+            })
+
+            let pred = await res.json()
+            console.log(pred)
+        }
+
     </script>
     <style>
         * {
@@ -54,7 +65,7 @@
 </head>
 <body onload="init()">
     <div class="mnist-grid" id="main-canvas"></div>
-
+    <button onclick="predict()">predict</button>
     <footer>
         <hr>
         contact: 105598018+wirl@ntut.org.tw
