@@ -8,7 +8,7 @@
          * @type{HTMLDivElement[]}*/
         let bars = []
         let hold = false
-        document.addEventListener("mousedown", () => { hold = true })
+        document.addEventListener("mousedown", (ev) => { ev.preventDefault(); hold = true })
         document.addEventListener("mouseup", () => { hold = false })
         function draw(pixel, x, y) {
             if (!hold) return
@@ -21,13 +21,14 @@
             for (let y = 0; y < 28; ++y) for (let x = 0; x < 28; ++x) {
                 data[y * 28 + x] = 0
                 let pixel = document.createElement('div')
-                pixel.onmousemove = () => draw(pixel, x, y)
+                pixel.onmouseenter = () => draw(pixel, x, y)
                 canvas.appendChild(pixel)
             }
 
             let results = document.querySelector('#results')
             for (let x = 0; x < 10; ++x) {
                 let bar = document.createElement('div')
+                bar.innerText = x
                 bars[x] = bar
                 results.appendChild(bar)
             }
@@ -45,8 +46,14 @@
             console.log(pred)
 
             for (let i = 0; i < 10; ++i) {
-                bars[i].style.marginTop = Math.floor(pred[i] * 100) + '%';
+                bars[i].style.height = 100-Math.floor(pred[i] * 100) + '%';
             }
+        }
+
+        function cleardraw() {
+            data.fill(0)
+            for (let pixel of document.querySelectorAll('[data-on]'))
+                delete pixel.dataset.on
         }
 
     </script>
@@ -83,17 +90,19 @@
             grid-template-columns: repeat(10,1fr);
             grid-column-gap: 1px;
             border: 1px solid black;
+            background-color: black;
         }
 
             #results > div {
-                background-color: black;
+                background-color: white;
                 vertical-align: bottom;
             }
     </style>
 </head>
 <body onload="init()">
     <div class="mnist-grid" id="main-canvas"></div>
-    <button onclick="predict()" style="margin:10px 0">predict</button>
+    <button onclick="predict()" style="margin:10px 10px">predict</button>
+    <button onclick="cleardraw()" style="margin:10px 10px">clear</button>
     <div id="results"></div>
     <footer>
         <hr>
