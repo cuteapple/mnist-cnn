@@ -11,6 +11,7 @@ just some sample code
  - h5py 2.7.1
  - numpy 1.14.3
  - opencv-python 3.4.1.15 (demo.py only)
+ - flask 1.0.2 (server.py only)
  
 ## contact
  - t105598018+wirl@ntut.org.tw
