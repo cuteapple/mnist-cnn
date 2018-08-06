@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>mnist-cnn</title>
+    <script>
+        let data = Array(28 * 28).fill(0)
+
+        let hold = false
+        document.addEventListener("mousedown", () => { hold = true })
+        document.addEventListener("mouseup", () => { hold = false })
+        function draw(pixel, x, y) {
+            if (!hold) return
+            data[y * 28 + x] = 1
+            pixel.dataset.on = true
+        }
+
+        function init() {
+            let canvas = document.querySelector('#main-canvas')
+            for (let y = 0; y < 28; ++y) for (let x = 0; x < 28; ++x) {
+                data[y * 28 + x] = 0
+                let pixel = document.createElement('div')
+                pixel.onmousemove = () => draw(pixel, x, y)
+                canvas.appendChild(pixel)
+            }
+        }
+
+    </script>
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        #main-canvas {
+            width: 280px;
+            height: 280px;
+            border: 1px solid black;
+        }
+
+        .mnist-grid {
+            display: grid;
+            grid-template-columns: repeat(28,1fr);
+            grid-template-rows: repeat(28,1fr)
+        }
+
+            .mnist-grid > * {
+                width: 100%;
+                height: 100%;
+            }
+
+        [data-on] {
+            background-color: black;
+        }
+    </style>
+</head>
+<body onload="init()">
+    <div class="mnist-grid" id="main-canvas"></div>
+
+    <footer>
+        <hr>
+        contact: 105598018+wirl@ntut.org.tw
+    </footer>
+</body>
+</html>
