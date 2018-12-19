@@ -1,5 +1,8 @@
 # mnist-cnn
-just some sample code
+
+just a mnist cnn example
+
+![demo.py example](demo.gif)
 
 ---
 
