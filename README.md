@@ -5,12 +5,14 @@ just a keras mnist cnn example with some demo
 ---
 
 demo.py (opencv-python)
+
 ![demo.py example](demo.gif)
 
 ---
 
 server.py (flask)
-![demo.py example](demo_web.gif)
+
+![server.py example](demo_web.gif)
 
 
 ---
